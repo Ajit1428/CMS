@@ -1,9 +1,11 @@
-import Image from "next/image";
+import HomePage from "@/app/(home)/page";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
-    <div className="text-white bg-green-400"> 
-      Hello KBL Securities.
-    </div>
+    <>
+      <UserButton afterSignOutUrl="/" />
+      <HomePage />
+    </>
   );
 }
