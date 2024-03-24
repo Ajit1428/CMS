@@ -1,9 +1,11 @@
 import HomePage from "@/app/(home)/page";
+import Navbar from "@/components/custom/right-navbar";
 
 export default function Home() {
   return (
-    <main className="bg-blue-400 h-full w-full flex items-center justify-center">
+    <div className="bg-blue-400 h-full w-full overflow-hidden">
+      <Navbar />
       <HomePage />
-    </main>
+    </div>
   );
 }
