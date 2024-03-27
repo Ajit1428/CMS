@@ -24,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{
-      baseTheme: shadesOfPurple
-    }}>
+    <ClerkProvider
+      appearance={{
+        baseTheme: shadesOfPurple,
+      }}
+    >
       <html lang="en">
-        <body className={cn("dark:bg-[#1e1e2e]", poppins.className)} suppressHydrationWarning= {true}>
+        <body className={cn("dark:bg-[#1e1e2e]", poppins.className)}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}
           </ThemeProvider>

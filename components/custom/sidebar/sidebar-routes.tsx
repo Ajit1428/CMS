@@ -10,7 +10,7 @@ const SideBarRoutes = () => {
 
   return (
     <div className="w-full h-full mt-10">
-      {!userPage && adminRoutes.map((route) => (
+      {((userPage && userRoutes) || adminRoutes).map((route) => (
         <SideBarItems
           key={route.href}
           label={route.label}
