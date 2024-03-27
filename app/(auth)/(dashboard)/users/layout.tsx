@@ -14,7 +14,7 @@ const StaffLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex justify-end m-2">
         <NavBar />
       </div>
-      {children}
+      <div className="ml-60">{children}</div>
     </div>
   );
 };

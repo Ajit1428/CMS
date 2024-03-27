@@ -3,17 +3,17 @@ import { LayoutDashboard, Truck, Users } from "lucide-react";
 export const routes = [
   {
     label: "Dashboard",
-    href: "/dashboard",
+    href: "/users/dashboard",
     icon: LayoutDashboard,
   },
   {
     label: "TMS",
-    href: "/tms",
+    href: "/users/tms",
     icon: Users,
   },
   {
     label: "Courier",
-    href: "/courier",
+    href: "/users/courier",
     icon: Truck
   }
 ]

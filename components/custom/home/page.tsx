@@ -1,14 +1,14 @@
 "use client"
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 const HomePage = () => {
   const router = useRouter();
   const onContinue = () => {
-    router.push("/welcome")
+    router.push("/users/welcome")
   }
 
 

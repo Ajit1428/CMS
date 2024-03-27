@@ -1,10 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
-import { UserButton } from "@clerk/nextjs";
-import { ModeToggle } from "../modeToggle";
+import { ModeToggle } from "@/components/custom/modeToggle";
 
 const NavBar = () => {
   const currentUrl = usePathname() === "/";
