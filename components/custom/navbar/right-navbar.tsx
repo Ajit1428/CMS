@@ -1,15 +1,22 @@
 "use client";
+
 import { usePathname } from "next/navigation";
 
+import { cn } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "../modeToggle";
 
 const NavBar = () => {
-  const currentUrl= usePathname() === '/'
+  const currentUrl = usePathname() === "/";
   return (
-    <div className="flex space-x-4 h-12 items-center p-2 justify-end border rounded-full shadow-sm w-24 ml-auto mr-2 mt-2">
+    <div
+      className={cn(
+        "flex p-2 space-x-4 items-center",
+        currentUrl && "shadow-yellow-400"
+      )}
+    >
       <UserButton afterSignOutUrl="/" />
-      {!currentUrl && <ModeToggle/>}
+      <ModeToggle />
     </div>
   );
 };

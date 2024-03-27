@@ -24,7 +24,7 @@ const HomePage = () => {
           Kumari Bank Limited and K.B.L Securities Limited.
         </p>
         <p className="text-red-500 font-bold">
-          *Note: This website is confidential and can be used only by staffs*
+          *Note: This website is confidential and can be used only by the staffs*
         </p>
         <Button onClick={onContinue} className="mb-6 rounded-full" >Click to continue</Button>
       </div>

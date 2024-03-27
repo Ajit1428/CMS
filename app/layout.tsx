@@ -3,8 +3,10 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { shadesOfPurple } from "@clerk/themes";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,9 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{
+      baseTheme: shadesOfPurple
+    }}>
       <html lang="en">
-        <body className={poppins.className}>
+        <body className={cn("dark:bg-[#1e1e2e]", poppins.className)}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}
           </ThemeProvider>
