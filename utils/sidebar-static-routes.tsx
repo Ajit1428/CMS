@@ -1,6 +1,6 @@
-import { LayoutDashboard, Truck, Users } from "lucide-react";
+import { LayoutDashboard, Truck, Users, Cog, UserCog2 } from "lucide-react";
 
-export const routes = [
+export const userRoutes = [
   {
     label: "Dashboard",
     href: "/users/dashboard",
@@ -14,6 +14,34 @@ export const routes = [
   {
     label: "Courier",
     href: "/users/courier",
-    icon: Truck
-  }
-]
+    icon: Truck,
+  },
+];
+
+export const adminRoutes = [
+  {
+    label: "Dashboard",
+    href: "/admin/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    label: "Manage Branches",
+    href: "/admin/manage-branches",
+    icon: Cog,
+  },
+  {
+    label: "Manage Users",
+    href: "/admin/manage-users",
+    icon: UserCog2,
+  },
+  {
+    label: "TMS",
+    href: "/admin/tms",
+    icon: Users,
+  },
+  {
+    label: "Courier",
+    href: "/admin/courier",
+    icon: Truck,
+  },
+];

@@ -1,4 +1,4 @@
-import KumariLogo from "../kumariLogo"
+import KumariLogo from "../logo/kumariLogo"
 import SideBarRoutes from "./sidebar-routes"
 
 function SideBar() {

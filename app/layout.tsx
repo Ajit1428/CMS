@@ -5,7 +5,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { shadesOfPurple } from "@clerk/themes";
 
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider/theme-provider";
 import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
@@ -28,7 +28,7 @@ export default function RootLayout({
       baseTheme: shadesOfPurple
     }}>
       <html lang="en">
-        <body className={cn("dark:bg-[#1e1e2e]", poppins.className)}>
+        <body className={cn("dark:bg-[#1e1e2e]", poppins.className)} suppressHydrationWarning= {true}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}
           </ThemeProvider>

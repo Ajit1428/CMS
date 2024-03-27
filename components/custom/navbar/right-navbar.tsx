@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/custom/modeToggle";
+import { ModeToggle } from "@/components/custom/theme/modeToggle";
 
 const NavBar = () => {
   const currentUrl = usePathname() === "/";

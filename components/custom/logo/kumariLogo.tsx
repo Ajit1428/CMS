@@ -7,6 +7,7 @@ const KumariLogo = () => {
     width={80}
     height={80}
     alt="kumarilogo"
+    priority
    /> 
    );
 }
