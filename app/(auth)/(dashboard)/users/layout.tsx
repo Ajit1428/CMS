@@ -1,4 +1,4 @@
-import NavBar from "@/components/custom/navbar/right-navbar";
+import RightNavbar from "@/components/custom/navbar/right-navbar";
 import MobileSidebar from "@/components/custom/sidebar/mobile-sidebar";
 import SideBar from "@/components/custom/sidebar/sidebar";
 
@@ -12,7 +12,7 @@ const StaffLayout = ({ children }: { children: React.ReactNode }) => {
         <MobileSidebar />
       </div>
       <div className="flex justify-end m-2">
-        <NavBar />
+        <RightNavbar />
       </div>
       <div className="ml-60">{children}</div>
     </div>

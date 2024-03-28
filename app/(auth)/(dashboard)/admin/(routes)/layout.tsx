@@ -1,4 +1,5 @@
-import NavBar from "@/components/custom/navbar/right-navbar";
+import LeftNavbar from "@/components/custom/navbar/left-navbar";
+import RightNavbar from "@/components/custom/navbar/right-navbar";
 import MobileSidebar from "@/components/custom/sidebar/mobile-sidebar";
 import SideBar from "@/components/custom/sidebar/sidebar";
 
@@ -11,8 +12,9 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-col fixed  z-50 m-4">
         <MobileSidebar />
       </div>
-      <div className="flex justify-end m-2">
-        <NavBar />
+      <div className="flex items-center justify-between ml-60 my-2 border-b-2 shadow-sm rounded-sm mr-2 pb-2">
+        <LeftNavbar />
+        <RightNavbar />
       </div>
       <div className="ml-60">{children}</div>
     </div>

@@ -6,7 +6,7 @@ import { UserButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/custom/theme/modeToggle";
 
-const NavBar = () => {
+const RightNavbar = () => {
   const currentUrl = usePathname() === "/";
   return (
     <div
@@ -21,4 +21,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default RightNavbar;

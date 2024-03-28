@@ -1,11 +1,11 @@
 "use client";
 
-import { BranchModal } from "@/components/custom/branch/modal";
+import { BranchModal } from "@/components/custom/modal/branch-modal";
 
 const AdminDashboard = () => {
   return (
     <div>
-      <BranchModal title="Test Branch" description="Kathmandu Branch" />
+      Admin Dashboard!
     </div>
   );
 };
