@@ -233,7 +233,6 @@ export const branches = [
       { branch: "Thimi Branch, Bhaktapur" },
       { branch: "Tinkune Branch, Kathmandu" },
       { branch: "Tokha Branch, Kathmandu" },
-
     ],
   },
   {
@@ -259,6 +258,7 @@ export const branches = [
       { branch: "Duipiple Branch, Lamjung" },
       { branch: "Dulegauda Branch, Tanahu" },
       { branch: "Dumkauli Branch, Nawalpur" },
+      { branch: "Falebas Extension Counter, Parbat" },
       { branch: "Gaindakot Branch, Nawalpur" },
       { branch: "Ghiring Branch, Tanahu" },
       { branch: "Gorkha Branch, Gorkha" },
@@ -283,13 +283,16 @@ export const branches = [
     province: "LUMBINI PROVINCE",
     branches: [
       { branch: "Arhali Branch, Palpa" },
+      { branch: "Asnaya Extension Counter, Parasi" },
       { branch: "Bahadurgunj Branch, Kapilvastu" },
       { branch: "Bansgadhi Branch, Bardiya" },
       { branch: "Bardaghat Branch, Parasi" },
+      { branch: "Bartung Extension Counter, Parbat" },
       { branch: "Bhalubang Branch, Dang Deukhuri" },
       { branch: "Bhumahi Branch, Parasi" },
       { branch: "Bijauri Branch, Dang Deukhuri" },
       { branch: "Chandrauta Branch, Kapilvastu" },
+      { branch: "Charange Extension Counter, Rupandehi" },
       { branch: "Chisapani Branch, Banke" },
       { branch: "Dangisharan Branch, Dang Deukhuri" },
       { branch: "Diver Tole Branch, Rupandehi" },
@@ -329,7 +332,11 @@ export const branches = [
       { branch: "Thakurbaba Branch, Bardiya" },
       { branch: "Traffic Chowk Butwal Branch, Rupandehi" },
       { branch: "Tulsipur Branch, Dang Deukhuri" },
-  ]
+      {
+        branch:
+          "Universal College of Medical Science Premises Extension Counter, Rupandehi",
+      },
+    ],
   },
   {
     province: "KARNALI PROVINCE",
@@ -344,11 +351,13 @@ export const branches = [
       { branch: "Mahabu Branch, Dailekh" },
       { branch: "Mehelkuna Branch, Surkhet" },
       { branch: "Musikot Branch, Surkhet" },
+      { branch: "Province Hospital Surkhet Extension Counter, Surkhet" },
       { branch: "Salyan Branch, Salyan" },
+      { branch: "Shreenagar Extension Counter, Salyan" },
       { branch: "Surkhet Branch, Surkhet" },
       { branch: "Surkhet Birendranagar Branch, Surkhet" },
       { branch: "Thatikandh Branch, Dailekh" },
-    ]
+    ],
   },
   {
     province: "SUDURPAKCHIM PROVINCE",
@@ -356,11 +365,14 @@ export const branches = [
       { branch: "Attariya Branch, Kailali" },
       { branch: "Baitadi Branch, Baitadi" },
       { branch: "Belauri Branch, Kanchanpur" },
+      { branch: "Belauri Extension Counter, Kanchanpur" },
       { branch: "Budar Branch, Doti" },
+      { branch: "Brahmadev Extension Counter, Kanchanpur" },
       { branch: "Campus Chowk Branch, Kailali" },
       { branch: "Chandani Dodhara Branch, Kanchanpur" },
       { branch: "Chhabispathivera Branch, Bajhang" },
       { branch: "Dadeldhura Branch, Dadeldhura" },
+      { branch: "Daijee Extension Counter, Kanchanpur" },
       { branch: "Dhangadi Branch, Kailali" },
       { branch: "Dilasaini Branch, Baitadi" },
       { branch: "Dipayal Branch, Doti" },
@@ -376,6 +388,6 @@ export const branches = [
       { branch: "Pahalmanpur Branch, Kailali" },
       { branch: "Thalara Branch, Bajhang" },
       { branch: "Tikapur Branch, Kailali" },
-    ]
+    ],
   },
 ];

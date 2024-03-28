@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -45,6 +46,12 @@ export const BranchModal = ({ title, description }: ModalProps) => {
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <BranchDropDownMenu />
+        <div className="flex justify-end items-center gap-2">
+          <DialogClose>
+            <Button variant="destructive">Cancel</Button>
+          </DialogClose>
+          <Button>Create</Button>
+        </div>
       </DialogContent>
     </Dialog>
   );
