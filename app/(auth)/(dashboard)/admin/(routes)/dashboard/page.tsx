@@ -1,6 +1,6 @@
 "use client";
 
-import { BranchModal } from "@/components/custom/modal/branch-modal";
+import { BranchModal } from "@/components/custom/branch/branch-dialog";
 
 const AdminDashboard = () => {
   return (

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 const HomePage = () => {
   const router = useRouter();
   const onContinue = () => {
-    router.push("/users/welcome")
+    router.push("/admin/dashboard")
   }
 
 

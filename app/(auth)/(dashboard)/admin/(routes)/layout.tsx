@@ -12,7 +12,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-col fixed  z-50 m-4">
         <MobileSidebar />
       </div>
-      <div className="flex items-center justify-between ml-60 my-2 border-b-2 shadow-sm rounded-sm mr-2 pb-2">
+      <div className="flex items-center justify-between ml-56 my-2 border-b-2 shadow-sm rounded-sm px-4 pb-2">
         <LeftNavbar />
         <RightNavbar />
       </div>

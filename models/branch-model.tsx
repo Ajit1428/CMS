@@ -2,18 +2,17 @@ import mongoose, { Document, model } from "mongoose";
 
 interface IBranch extends Document {
   id: string;
-  name: string;
   userId: string;
+  province: string;
+  branchName: string;
 }
 
 const branchSchema = new mongoose.Schema<IBranch>(
   {
     id: String,
-    name: {
-      type: String,
-      required: [true, "Please enter the name"],
-    },
     userId: String,
+    province: String,
+    branchName: String, 
   },
   { timestamps: true }
 );
