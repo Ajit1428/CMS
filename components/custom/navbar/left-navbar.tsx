@@ -1,14 +1,11 @@
 "use client";
 
-import { BranchDialog } from "@/components/custom/branch/branch-dialog";
-import BranchDropDownMenu from "@/modal/branch-modal";
+import { BranchProvider } from "@/provider/branch/branch-provider";
 
 const LeftNavbar = () => {
   return (
     <div>
-      <BranchDialog title="Kumari Bank Branches" description="Add a new branch">
-        <BranchDropDownMenu />
-      </BranchDialog>
+      <BranchProvider />
     </div>
   );
 };

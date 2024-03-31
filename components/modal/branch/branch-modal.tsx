@@ -1,4 +1,4 @@
-import { branches } from "@/utils/kumari-bank-branches";
+import { branches } from "@/config/static/branch/kumari-bank-branches";
 
 import {
   Select,

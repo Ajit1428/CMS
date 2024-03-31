@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { userRoutes, adminRoutes } from "@/utils/sidebar-static-routes";
+import { userRoutes, adminRoutes } from "@/config/static/sidebar/sidebar-static-routes";
 import SideBarItems from "./sidebar-items";
 
 const SideBarRoutes = () => {
