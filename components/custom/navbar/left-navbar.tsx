@@ -4,7 +4,7 @@ import { BranchProvider } from "@/provider/branch/branch-provider";
 
 const LeftNavbar = () => {
   return (
-    <div>
+    <div className="md:flex">
       <BranchProvider />
     </div>
   );

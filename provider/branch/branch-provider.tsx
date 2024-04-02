@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { BranchDialog } from "@/components/custom/branch/branch-dialog";
-import BranchDropDownMenu from "@/components/modal/branch/branch-modal";
+import BranchModal from "@/components/modal/branch-modal";
 
 export const BranchProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -16,9 +16,9 @@ export const BranchProvider = () => {
     return null;
   }
 
-  return(
-     <BranchDialog title="Kumari Bank Branches" description="Add a new branch">
-        <BranchDropDownMenu />
-      </BranchDialog>
-  )
+  return (
+    <BranchDialog title="Kumari Bank Branches" description="Add a new branch">
+      <BranchModal />
+    </BranchDialog>
+  );
 };

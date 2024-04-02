@@ -40,7 +40,7 @@ export const BranchDialog = ({ title, description, children }: ModalProps) => {
                 />
                 {title}
               </DialogTitle>
-              <DialogDescription>{description}</DialogDescription>
+              <DialogDescription className="flex justify-start">{description}</DialogDescription>
             </DialogHeader>
             {children}
           </DialogContent>
