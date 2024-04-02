@@ -2,6 +2,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { useState } from "react";
 
 import {
   Select,
@@ -22,6 +23,7 @@ import {
 import { branches } from "@/config/static/branch/kumari-bank-branches";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   branchName: z.string({
@@ -30,17 +32,27 @@ const formSchema = z.object({
 });
 
 const BranchModal = () => {
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values)
+      setLoading(true);
       const response = await axios.post("/api/branch", values);
-      console.log(response.data);
+      toast.success("The Branch has been Created");
+      console.log(response);
     } catch (error) {
+      if (error === "Mongo") {
+        console.log(`This is the error ${error}`);
+        toast.error("The branch you are trying to create already exists");
+      } else {
+        toast.error("This is default error");
+      }
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,9 +98,13 @@ const BranchModal = () => {
                 </SelectContent>
                 <div className="flex gap-2 justify-end items-center">
                   <DialogClose asChild>
-                    <Button variant="destructive">Cancel</Button>
+                    <Button disabled={loading} variant="destructive">
+                      Cancel
+                    </Button>
                   </DialogClose>
-                  <Button type="submit">Create</Button>
+                  <Button disabled={loading} type="submit">
+                    Create
+                  </Button>
                 </div>
               </Select>
               <FormMessage />

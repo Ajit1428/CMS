@@ -13,12 +13,14 @@ const RightNavbar = () => {
     <div
       className={cn(
         "flex md:justify-between md:ml-56 justify-end items-center px-4 py-2 border-b-2 rounded-md shadow-md",
-        currentUrl && "shadow-yellow-400"
+        currentUrl && "shadow-yellow-400",
       )}
     >
-      <div className="hidden md:flex">
-      <LeftNavbar />
-      </div>
+      {!currentUrl && (
+        <div className="hidden md:flex">
+          <LeftNavbar />
+        </div>
+      )}
       <div className="flex items-center p-2 space-x-4">
         <UserButton afterSignOutUrl="/" />
         <ModeToggle />
