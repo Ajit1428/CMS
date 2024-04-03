@@ -12,10 +12,27 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized user", { status: 401 });
     }
 
-    const branch = await branchModel.create({ userId, branchName });
+    const existBranch = await branchModel.findOne({branchName})
+
+    if(existBranch?.branchName !== branchName){
+    var branch = await branchModel.create({ userId, branchName });
+    }
+    else{
+     return new NextResponse('Branch Exists', {status: 400})
+    }
+
     return NextResponse.json(branch);
   } catch (error) {
-    console.log(`[BRANCH POST ERROR]`, error);
-    return new NextResponse("Branch POST error", { status: 500 });
+    return new NextResponse(`Branch POST error ${error}`, { status: 400 });
   }
 }
+
+// const validateBranch = async(data: string) => {
+// try {
+  
+// } catch (error) {
+//  return new NextResponse("") 
+// }
+
+  
+// }

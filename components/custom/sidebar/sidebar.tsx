@@ -1,3 +1,5 @@
+"use client"
+
 import KumariLogo from "../logo/kumariLogo";
 import SideBarRoutes from "./sidebar-routes";
 import LeftNavbar from "@/components/custom/navbar/left-navbar";

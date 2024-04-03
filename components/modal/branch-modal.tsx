@@ -1,8 +1,11 @@
+"use client";
+
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import {
   Select,
@@ -23,7 +26,6 @@ import {
 import { branches } from "@/config/static/branch/kumari-bank-branches";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
 
 const formSchema = z.object({
   branchName: z.string({
@@ -40,17 +42,10 @@ const BranchModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/branch", values);
+      await axios.post("/api/branch", values);
       toast.success("The Branch has been Created");
-      console.log(response);
     } catch (error) {
-      if (error === "Mongo") {
-        console.log(`This is the error ${error}`);
-        toast.error("The branch you are trying to create already exists");
-      } else {
-        toast.error("This is default error");
-      }
-      console.log(error);
+      toast.error("The branch you are trying to create already exists");
     } finally {
       setLoading(false);
     }
@@ -102,9 +97,11 @@ const BranchModal = () => {
                       Cancel
                     </Button>
                   </DialogClose>
-                  <Button disabled={loading} type="submit">
-                    Create
-                  </Button>
+                  <DialogClose asChild>
+                    <Button disabled={loading} type="submit">
+                      Create
+                    </Button>
+                  </DialogClose>
                 </div>
               </Select>
               <FormMessage />

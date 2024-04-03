@@ -1,3 +1,5 @@
+"use client"
+
 export const branches = [
   {
     province: "KOSHI PROVINCE",
