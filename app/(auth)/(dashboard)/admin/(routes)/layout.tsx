@@ -9,7 +9,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <ToastProvider />
       <div className="h-full overflow-hidden">
         <SiderbarProvider />
-        <div className="ml-60">{children}</div>
+        <div className="ml-60 mt-2">{children}</div>
       </div>
     </>
   );

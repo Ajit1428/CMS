@@ -19,10 +19,10 @@ export const SiderbarProvider = () => {
 
   return (
     <>
-      <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
+      <div className="hidden md:flex h-full flex-col fixed inset-y-0 z-50">
         <SideBar />
       </div>
-      <div className="flex flex-col fixed  z-50 m-4">
+      <div className="flex flex-col fixed z-50 m-4">
         <MobileSidebar />
       </div>
       <div className="mb-3 border-b-2 shadow-sm rounded-md">

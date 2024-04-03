@@ -12,8 +12,8 @@ import SideBar from "./sidebar";
 const MobileSidebar = () => {
   return ( 
     <Sheet>
-      <SheetTrigger className="md:hidden transition-all pr-4">
-        <Menu size={35} />
+      <SheetTrigger className="md:hidden transition-all">
+        <Menu className="fixed top-4 left-4" size={35} />
       </SheetTrigger>
       <SheetContent side="left">
         <SideBar />
