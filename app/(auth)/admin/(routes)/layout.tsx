@@ -3,7 +3,7 @@ import { SiderbarProvider } from "@/provider/sidebar/sidebar-provider";
 import { ToastProvider } from "@/provider/toast/toast-provider";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
-  mongoDB();
+  mongoDB()
   return (
     <>
       <ToastProvider />

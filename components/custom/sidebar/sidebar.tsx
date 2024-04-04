@@ -6,7 +6,7 @@ import SidebarBranchCreate from "./siderbar-branch-create";
 
 function SideBar() {
   return (
-    <div className="flex flex-col md:w-56 sm:w-full items-center pb-6 h-full border-r shadow-md bg-white dark:bg-[#1e1e2e] dark:shadow-blue-400">
+    <div className="flex md:flex flex-col fixed w-[20rem] md:w-56 items-center h-full  border-r shadow-md bg-white dark:bg-[#1e1e2e] dark:shadow-blue-400">
       <KumariLogo />
       <SideBarRoutes />
       <SidebarBranchCreate />

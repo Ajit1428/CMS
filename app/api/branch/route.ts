@@ -26,13 +26,3 @@ export async function POST(req: Request) {
     return new NextResponse(`Branch POST error ${error}`, { status: 400 });
   }
 }
-
-// const validateBranch = async(data: string) => {
-// try {
-  
-// } catch (error) {
-//  return new NextResponse("") 
-// }
-
-  
-// }

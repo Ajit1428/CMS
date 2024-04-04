@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { BranchDialog } from "@/components/custom/branch/branch-dialog";
+import { BranchDialog} from "@/components/custom/branch/branch-dialog";
 import BranchModal from "@/components/modal/branch-modal";
 
 export const BranchProvider = () => {
@@ -19,6 +19,6 @@ export const BranchProvider = () => {
   return (
     <BranchDialog title="Kumari Bank Branches" description="Add a new branch">
       <BranchModal />
-    </BranchDialog>
+    </BranchDialog >
   );
 };

@@ -18,8 +18,8 @@ export const SiderbarProvider = () => {
   }
 
   return (
-    <>
-      <div className="hidden md:flex h-full flex-col fixed inset-y-0 z-50">
+    <div className="overflow-hidden">
+      <div className="hidden md:flex">
         <SideBar />
       </div>
       <div className="flex flex-col fixed z-50 m-4">
@@ -28,6 +28,6 @@ export const SiderbarProvider = () => {
       <div className="mb-3 border-b-2 shadow-sm rounded-md">
         <RightNavbar />
       </div>
-    </>
+    </div>
   );
 };

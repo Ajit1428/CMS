@@ -9,7 +9,7 @@ const SidebarBranchCreate = () => {
   const rootUrl = pathname === "/";
   const userUrl = pathname.startsWith("/user");
 
-  return <div>{!rootUrl && !userUrl && <BranchProvider />}</div>;
+  return <div className="mb-4">{!rootUrl && !userUrl && <BranchProvider />}</div>;
 };
 
 export default SidebarBranchCreate;

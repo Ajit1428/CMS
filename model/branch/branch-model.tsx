@@ -1,4 +1,4 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, models, model } from "mongoose";
 
 export interface IBranch extends Document {
   userId: string;
@@ -17,8 +17,8 @@ const branchSchema = new mongoose.Schema<IBranch>(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-const branchModel = mongoose.model<IBranch>("Branch", branchSchema);
+const branchModel = models.Branch || model<IBranch>("Branch", branchSchema);
 export default branchModel;
