@@ -28,8 +28,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { branches } from "@/config/static/branch/kumari-bank-branches";
-import { UserStaff } from "@/config/static/user/user-staff";
-import { Checkbox } from "../ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { useZustand } from "@/hooks/zustand/useZustand";
 
 const formSchema = z.object({
   name: z
@@ -40,28 +40,37 @@ const formSchema = z.object({
   }),
   contactNumber: z
     .string()
-    .min(10, { message: "You must enter 10 digit number" }),
-  role: z.array(z.string()),
+    .min(10, { message: "You must enter 10 digit number" })
+    .max(10),
+  role: z.enum(["kbsl", "kbl"], {
+    required_error: "You need to select one of the two options",
+  }),
 });
 
 export const UserModal = () => {
+  const onClose = useZustand((state) => state.onClose);
   const [loading, setLoading] = useState(false);
+  const [isStaff, setIsStaff] = useState("");
+
   const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      branchName: "",
       contactNumber: "",
-      role: [],
+      role: undefined,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (values.role === "kbsl") {
+      values.branchName = "";
+    }
     console.log(values);
-  };
-
-  const onClick = () => {
-    router.push("/user/dashboard");
+    onClose();
+    router.push("/admin/dashboard");
   };
 
   return (
@@ -82,13 +91,51 @@ export const UserModal = () => {
         />
         <FormField
           control={form.control}
-          name="branchName"
+          name="role"
           render={({ field }) => (
             <FormItem className="mt-2">
+              <FormLabel> Are you?</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormItem className="space-x-2">
+                    <FormControl>
+                      <RadioGroupItem
+                        value="kbsl"
+                        onClick={() => setIsStaff("kbsl")}
+                      />
+                    </FormControl>
+                    <FormLabel>K.B.L. Securities Limited Staff</FormLabel>
+                  </FormItem>
+                  <FormItem className="space-x-2">
+                    <FormControl>
+                      <RadioGroupItem
+                        value="kbl"
+                        onClick={() => setIsStaff("kbl")}
+                      />
+                    </FormControl>
+                    <FormLabel>Kumari Bank Limited Staff</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="branchName"
+          render={({ field }) => (
+            <FormItem className="mt-2 transition">
               <FormLabel>Branch</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                value={isStaff === "kbl" ? field.value : ""}
+              >
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger disabled={isStaff === "kbsl" && true}>
                     <SelectValue placeholder="Select the branch..." />
                   </SelectTrigger>
                 </FormControl>
@@ -104,7 +151,7 @@ export const UserModal = () => {
                           {p.province}
                         </div>
                         <div className="text-md border-2 shadow-md p-2 rounded-md">
-                          {p.branches?.map((b) => (
+                          {p.branches?.map((b, index) => (
                             <SelectItem
                               key={b.branch}
                               value={b.branch}
@@ -136,39 +183,9 @@ export const UserModal = () => {
             </FormItem>
           )}
         />
-        <div className="flex items-center w-full gap-4 mt-2">
-          {UserStaff.map((item) => (
-            <FormField
-              key={item.id}
-              control={form.control}
-              name="role"
-              render={({ field }) => {
-                return (
-                  <FormItem key={item.id} className="flex items-center gap-2">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value?.includes(item.id)}
-                        onCheckedChange={(checked) => {
-                          return checked
-                            ? field.onChange([...field.value, item.id])
-                            : field.onChange(
-                                field.value?.filter(
-                                  (value) => value !== item.id
-                                )
-                              );
-                        }}
-                      />
-                    </FormControl>
-                    <FormLabel className="text-sm font-normal">
-                      {item.label}
-                    </FormLabel>
-                  </FormItem>
-                );
-              }}
-            />
-          ))}
-        </div>
-        <Button className="mt-4">Confirm</Button>
+        <Button type="submit" className="mt-4">
+          Confirm
+        </Button>
       </form>
     </Form>
   );

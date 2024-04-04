@@ -37,14 +37,17 @@ const BranchModal = () => {
   const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      branchName: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      const response= await axios.post("/api/branch", values);
+      const response = await axios.post("/api/branch", values);
       toast.success("The Branch has been Created");
-      window.location.assign(`/admin/dashboard/${response.data._id}`)
+      window.location.assign(`/admin/dashboard/${response.data._id}`);
     } catch (error) {
       toast.error("The branch you are trying to create already exists");
     } finally {
