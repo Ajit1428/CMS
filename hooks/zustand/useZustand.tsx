@@ -1,13 +1,14 @@
-import {create} from "zustand"
+import { create } from "zustand";
 
-interface zustandProps{
-  open: boolean,
-  isOpen: () => void,
-  onClose: () => void
+interface zustandProps {
+  open: boolean;
+  isOpen: (value: boolean) => void;
+  onClose: (value: boolean) => void;
 }
 
 export const useZustand = create<zustandProps>((set) => ({
-  open : true,
-  isOpen : () => set({open: true}),
-  onClose: () => set({open: false})
-}))
+  open: false,
+  isOpen: (value) => set({ open: value }),
+  onClose: (value) => set({ open: value }),
+}));
+

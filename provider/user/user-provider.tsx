@@ -17,11 +17,13 @@ export const UserProvider = () => {
   }
 
   return (
-    <UserDetailDialog
-      title="Additional Details"
-      description="Please fill out the form in order to continue"
-    >
-      <UserModal />
-    </UserDetailDialog>
+    <>
+      <UserDetailDialog
+        title="Additional Details"
+        description="Please fill out the form in order to continue"
+      >
+        <UserModal />
+      </UserDetailDialog>
+    </>
   );
 };

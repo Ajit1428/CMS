@@ -6,16 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { CheckIcon } from "lucide-react";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Form,
   FormItem,
@@ -23,9 +15,24 @@ import {
   FormMessage,
   FormField,
 } from "@/components/ui/form";
+import {
+  Command,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandEmpty,
+} from "@/components/ui/command";
 import { branches } from "@/config/static/branch/kumari-bank-branches";
 import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { useZustand } from "@/hooks/zustand/useZustand";
 
 const formSchema = z.object({
   branchName: z.string({
@@ -34,6 +41,10 @@ const formSchema = z.object({
 });
 
 const BranchModal = () => {
+  const open = useZustand((state) => state.open);
+  const isOpen = useZustand((state) => state.isOpen);
+  const onClose = useZustand((state) => state.onClose);
+
   const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,51 +74,73 @@ const BranchModal = () => {
           name="branchName"
           render={({ field }) => (
             <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select the branch..." />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent
-                  side="bottom"
-                  position="item-aligned"
-                  className="dark:bg-[#1e1e2e]"
-                >
-                  <SelectGroup>
-                    {branches.map((p) => (
-                      <SelectLabel key={p.province}>
-                        <div className="text-md font-extrabold border-2 bg-yellow-300 dark:text-black shadow-md p-2 rounded-md">
-                          {p.province}
-                        </div>
-                        <div className="text-md border-2 shadow-md p-2 rounded-md">
-                          {p.branches?.map((b) => (
-                            <SelectItem
+              <Popover
+                open={open}
+                onOpenChange={(open) => {
+                  open ? isOpen((open = true)) : isOpen((open = false));
+                }}
+              >
+                <PopoverTrigger asChild>
+                  <FormControl className="flex justify-start">
+                    <Button variant="outline" className="w-full">
+                      {field.value
+                        ? branches?.map(
+                            (a) =>
+                              a?.branches?.find((b) => field.value === b.branch)
+                                ?.branch,
+                          )
+                        : "Select the branch"}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-[32rem]">
+                  <Command>
+                    <CommandInput placeholder="Search..." />
+                    <CommandList className="w-full">
+                      <CommandEmpty>No such branch available</CommandEmpty>
+                      <CommandGroup>
+                        {branches.map((a) =>
+                          a.branches.map((b) => (
+                            <CommandItem
                               key={b.branch}
                               value={b.branch}
-                              className="hover:focus:bg-blue-400 focus:bg-blue-400 font-normal"
+                              className="aria-selected:bg-blue-300"
+                              onSelect={() => {
+                                form.setValue("branchName", b.branch);
+                                onClose(false);
+                              }}
                             >
                               {b.branch}
-                            </SelectItem>
-                          ))}
-                        </div>
-                      </SelectLabel>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-                <div className="flex gap-2 justify-end items-center">
-                  <DialogClose asChild>
-                    <Button disabled={loading} variant="destructive">
+                              <CheckIcon
+                                className={cn(
+                                  "ml-auto h-4 w-4",
+                                  b.branch === field.value
+                                    ? "opacity-100"
+                                    : "opacity-0",
+                                )}
+                              />
+                            </CommandItem>
+                          )),
+                        )}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+                <DialogClose asChild>
+                  <div className="flex justify-end gap-2 mt-4">
+                    <Button
+                      disabled={loading}
+                      type="reset"
+                      variant="destructive"
+                    >
                       Cancel
                     </Button>
-                  </DialogClose>
-                  <DialogClose asChild>
                     <Button disabled={loading} type="submit">
-                      Create
+                      Continue
                     </Button>
-                  </DialogClose>
-                </div>
-              </Select>
+                  </div>
+                </DialogClose>
+              </Popover>
               <FormMessage />
             </FormItem>
           )}

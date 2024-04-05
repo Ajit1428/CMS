@@ -1,35 +1,38 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import toast from "react-hot-toast";
-import { useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import * as z from "zod";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
-  FormItem,
   FormControl,
-  FormMessage,
   FormField,
+  FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { branches } from "@/config/static/branch/kumari-bank-branches";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useZustand } from "@/hooks/zustand/useZustand";
+import { DialogClose } from "../ui/dialog";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "../ui/command";
+import { CheckIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z
@@ -48,6 +51,8 @@ const formSchema = z.object({
 });
 
 export const UserModal = () => {
+  const open = useZustand((state) => state.open);
+  const isOpen = useZustand((state) => state.isOpen);
   const onClose = useZustand((state) => state.onClose);
   const [loading, setLoading] = useState(false);
   const [isStaff, setIsStaff] = useState("");
@@ -68,9 +73,10 @@ export const UserModal = () => {
     if (values.role === "kbsl") {
       values.branchName = "";
     }
+    setLoading(true);
     console.log(values);
-    onClose();
     router.push("/admin/dashboard");
+    setLoading(false);
   };
 
   return (
@@ -130,42 +136,63 @@ export const UserModal = () => {
           render={({ field }) => (
             <FormItem className="mt-2 transition">
               <FormLabel>Branch</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                value={isStaff === "kbl" ? field.value : ""}
+              <Popover
+                open={open}
+                onOpenChange={(open) => {
+                  open ? isOpen((open = true)) : isOpen((open = false));
+                }}
               >
-                <FormControl>
-                  <SelectTrigger disabled={isStaff === "kbsl" && true}>
-                    <SelectValue placeholder="Select the branch..." />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent
-                  side="bottom"
-                  position="item-aligned"
-                  className="dark:bg-[#1e1e2e]"
-                >
-                  <SelectGroup>
-                    {branches.map((p) => (
-                      <SelectLabel key={p.province}>
-                        <div className="text-md font-extrabold border-2 bg-yellow-300 dark:text-black shadow-md p-2 rounded-md">
-                          {p.province}
-                        </div>
-                        <div className="text-md border-2 shadow-md p-2 rounded-md">
-                          {p.branches?.map((b, index) => (
-                            <SelectItem
+                <PopoverTrigger asChild>
+                  <FormControl className="flex justify-start">
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      disabled={isStaff === "kbsl"}
+                    >
+                      {field.value
+                        ? branches?.map(
+                            (a) =>
+                              a?.branches?.find((b) => field.value === b.branch)
+                                ?.branch,
+                          )
+                        : "Select the branch"}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-[32rem]">
+                  <Command>
+                    <CommandInput placeholder="Search..." />
+                    <CommandList className="w-full">
+                      <CommandEmpty>No such branch available</CommandEmpty>
+                      <CommandGroup>
+                        {branches.map((a) =>
+                          a.branches.map((b) => (
+                            <CommandItem
                               key={b.branch}
                               value={b.branch}
-                              className="hover:focus:bg-blue-400 focus:bg-blue-400 font-normal"
+                              className="aria-selected:bg-blue-300"
+                              onSelect={() => {
+                                form.setValue("branchName", b.branch);
+                                onClose(false);
+                              }}
                             >
                               {b.branch}
-                            </SelectItem>
-                          ))}
-                        </div>
-                      </SelectLabel>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                              <CheckIcon
+                                className={cn(
+                                  "ml-auto h-4 w-4",
+                                  b.branch === field.value
+                                    ? "opacity-100"
+                                    : "opacity-0",
+                                )}
+                              />
+                            </CommandItem>
+                          )),
+                        )}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <FormMessage />
             </FormItem>
           )}
@@ -183,9 +210,11 @@ export const UserModal = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-4">
-          Confirm
-        </Button>
+        <DialogClose>
+          <Button type="submit" className="mt-4" disabled={loading}>
+            Confirm
+          </Button>
+        </DialogClose>
       </form>
     </Form>
   );
