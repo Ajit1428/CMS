@@ -8,6 +8,7 @@ import { shadesOfPurple } from "@clerk/themes";
 import { ThemeProvider } from "@/components/theme-provider/theme-provider";
 import { cn } from "@/lib/utils";
 import { ToastProvider } from "@/provider/toast/toast-provider";
+import { mongoDB } from "@/config/db/mongodb";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  mongoDB();
   return (
     <ClerkProvider
       appearance={{

@@ -45,6 +45,7 @@ const formSchema = z.object({
   role: z.enum(["kbsl", "kbl"], {
     required_error: "You need to select one of the two options",
   }),
+  email: z.string().email({ message: "Please enter your email address" }),
   branchName: z.string({
     required_error: "PLease select your particular branch",
   }),
@@ -68,6 +69,7 @@ export const UserModal = () => {
     defaultValues: {
       name: "",
       role: undefined,
+      email: "",
       branchName: "",
       contact: "",
     },
@@ -76,7 +78,7 @@ export const UserModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       if (values.role === "kbsl") {
-        values.branchName = "";
+        values.branchName = "Head Office";
       }
       setLoading(true);
       await axios.post("/api/user", values);
@@ -145,6 +147,19 @@ export const UserModal = () => {
         />
         <FormField
           control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="mt-2">
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="branchName"
           render={({ field }) => (
             <FormItem className="mt-2 transition">
@@ -172,7 +187,7 @@ export const UserModal = () => {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-[32rem]">
+                <PopoverContent className="w-[32rem] fixed right-[-16rem]">
                   <Command>
                     <CommandInput placeholder="Search..." />
                     <CommandList className="w-full">
@@ -183,7 +198,7 @@ export const UserModal = () => {
                             <CommandItem
                               key={b.branch}
                               value={b.branch}
-                              className="aria-selected:bg-blue-300"
+                              className="aria-selected:bg-blue-400"
                               onSelect={() => {
                                 form.setValue("branchName", b.branch);
                                 onClose(false);

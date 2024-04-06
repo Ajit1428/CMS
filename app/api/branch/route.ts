@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 
 import { auth } from "@clerk/nextjs";
 import BranchModel from "@/model/branch/branch-model";
-import { mongoDB } from "@/config/db/mongodb";
 
 export async function POST(req: Request) {
-  mongoDB();
   try {
     const { userId } = auth();
     const { branchName } = await req.json();

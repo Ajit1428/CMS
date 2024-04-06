@@ -1,20 +1,20 @@
 import { redirect } from "next/navigation";
 
-import { mongoDB } from "@/config/db/mongodb";
 import UserModel from "@/model/user/user-model";
 import { UserProvider } from "@/provider/user/user-provider";
 import { auth } from "@clerk/nextjs";
 
 const DetailPage = async () => {
-  mongoDB();
   const { userId } = auth();
-  const validated = await UserModel.findOne({ userId });
+  const validatedUser = await UserModel.findOne({ userId });
 
-  if (userId === validated?.userId) {
+  if (userId === validatedUser?.userId && validatedUser?.role === "admin") {
+    redirect("/admin/dashboard");
+  } else if (userId === validatedUser?.userId) {
     redirect("/user/dashboard");
+  } else {
+    return <UserProvider />;
   }
-
-  return <UserProvider />;
 };
 
 export default DetailPage;

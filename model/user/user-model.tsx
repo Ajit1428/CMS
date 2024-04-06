@@ -4,6 +4,7 @@ interface IUser extends Document {
   userId: string;
   name: string;
   role: string;
+  email: string;
   branchName: string;
   contact: string;
 }
@@ -22,6 +23,10 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: String,
       enum: ["kbl", "kbsl"],
       required: true,
+    },
+    email: {
+      type: String,
+      required: [true, "Please enter your official mail"],
     },
     branchName: {
       type: String,
