@@ -7,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useZustand } from "@/hooks/zustand/useZustand";
 
 import Image from "next/image";
 

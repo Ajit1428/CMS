@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { UserDetailDialog } from "@/components/custom/user/user-dialog";
-import { UserModal } from "@/components/modal/user-modal";
+import { UserModal } from "@/components/modal/user/user-modal";
 
 export const UserProvider = () => {
   const [isMounted, setIsMounted] = useState(false);

@@ -21,6 +21,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/modal/branch-modal.tsx/branch-modal.tsx /branch",
+    "components/modal/branch-modal.tsx/branch",
+    "components/modal/branch-modal.tsx ./branch"
+  ],
   "exclude": ["node_modules"]
 }

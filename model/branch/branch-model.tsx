@@ -1,11 +1,11 @@
 import mongoose, { Document, models, model } from "mongoose";
 
-export interface IBranch extends Document {
+interface IBranch extends Document {
   userId: string;
   branchName: string;
 }
 
-const branchSchema = new mongoose.Schema<IBranch>(
+const BranchSchema = new mongoose.Schema<IBranch>(
   {
     userId: {
       type: String,
@@ -14,11 +14,11 @@ const branchSchema = new mongoose.Schema<IBranch>(
     branchName: {
       type: String,
       unique: true,
-      required: true,
+      required: [true, "Please enter the branch name to proceed"],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const branchModel = models.Branch || model<IBranch>("Branch", branchSchema);
-export default branchModel;
+const BranchModel = models.Branch || model<IBranch>("Branch", BranchSchema);
+export default BranchModel;

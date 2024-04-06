@@ -7,6 +7,7 @@ import { shadesOfPurple } from "@clerk/themes";
 
 import { ThemeProvider } from "@/components/theme-provider/theme-provider";
 import { cn } from "@/lib/utils";
+import { ToastProvider } from "@/provider/toast/toast-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={cn("dark:bg-[#1e1e2e]", poppins.className)}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            <ToastProvider />
             {children}
           </ThemeProvider>
         </body>

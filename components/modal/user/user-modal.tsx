@@ -20,9 +20,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { branches } from "@/config/static/branch/kumari-bank-branches";
 import { useZustand } from "@/hooks/zustand/useZustand";
-import { DialogClose } from "../ui/dialog";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { DialogClose } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Command,
   CommandEmpty,
@@ -30,7 +34,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "../ui/command";
+} from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,16 +42,16 @@ const formSchema = z.object({
   name: z
     .string()
     .min(3, { message: "The name must be of aleat 3 characters" }),
-  branchName: z.string({
-    required_error: "PLease select your particular branch",
-  }),
-  contactNumber: z
-    .string()
-    .min(10, { message: "You must enter 10 digit number" })
-    .max(10),
   role: z.enum(["kbsl", "kbl"], {
     required_error: "You need to select one of the two options",
   }),
+  branchName: z.string({
+    required_error: "PLease select your particular branch",
+  }),
+  contact: z
+    .string()
+    .min(10, { message: "You must enter 10 digit number" })
+    .max(10),
 });
 
 export const UserModal = () => {
@@ -63,20 +67,29 @@ export const UserModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      branchName: "",
-      contactNumber: "",
       role: undefined,
+      branchName: "",
+      contact: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (values.role === "kbsl") {
-      values.branchName = "";
+    try {
+      if (values.role === "kbsl") {
+        values.branchName = "";
+      }
+      setLoading(true);
+      await axios.post("/api/user", values);
+      toast.success("Thanks your for filing in the details");
+      router.push("/user/dashboard");
+    } catch (error) {
+      toast.error(
+        "You  already have an account and may belong to a certain branch",
+      );
+      console.log(`[DETAILS ERROR]`, error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(true);
-    console.log(values);
-    router.push("/admin/dashboard");
-    setLoading(false);
   };
 
   return (
@@ -199,7 +212,7 @@ export const UserModal = () => {
         />
         <FormField
           control={form.control}
-          name="contactNumber"
+          name="contact"
           render={({ field }) => (
             <FormItem className="mt-2">
               <FormLabel>Contact Number</FormLabel>
@@ -210,7 +223,7 @@ export const UserModal = () => {
             </FormItem>
           )}
         />
-        <DialogClose>
+        <DialogClose asChild>
           <Button type="submit" className="mt-4" disabled={loading}>
             Confirm
           </Button>
