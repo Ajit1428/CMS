@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema<IUser>(
     email: {
       type: String,
       required: [true, "Please enter your official mail"],
+      unique: true
     },
     branchName: {
       type: String,
