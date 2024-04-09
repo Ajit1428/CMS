@@ -1,5 +1,3 @@
-"use client";
-
 import KumariLogo from "../logo/kumariLogo";
 import SideBarRoutes from "./sidebar-routes";
 import SidebarBranchCreate from "./siderbar-branch-create";
