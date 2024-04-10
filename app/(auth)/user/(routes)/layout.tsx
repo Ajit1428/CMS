@@ -1,3 +1,4 @@
+import LeftNavbar from "@/components/custom/navbar/left-navbar";
 import UserModel from "@/model/user/user-model";
 import { SiderbarProvider } from "@/provider/sidebar/sidebar-provider";
 import { auth } from "@clerk/nextjs";
@@ -14,7 +15,7 @@ const StaffLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="h-full overflow-hidden">
-      <SiderbarProvider />
+      <SiderbarProvider branchName={validatedUser.branchName} />
       <div className="ml-60">{children}</div>
     </div>
   );

@@ -1,7 +1,8 @@
+
 const TmsPage = () => {
   return ( 
   <div>
-    TMS page!
+    TMS page
   </div>);
 }
  

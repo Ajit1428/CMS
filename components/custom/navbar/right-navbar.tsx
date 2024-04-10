@@ -6,7 +6,7 @@ import { ModeToggle } from "@/components/custom/theme/modeToggle";
 
 const RightNavbar = () => {
   return (
-    <div className="flex justify-end items-center p-4 space-x-4">
+    <div className="flex justify-end items-center p-4 space-x-4 w-full">
       <UserButton afterSignOutUrl="/" />
       <ModeToggle />
     </div>

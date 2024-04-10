@@ -56,7 +56,7 @@ const BranchModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/branch", values);
+      const response = await axios.post("/api/admin/branch", values);
       toast.success("The Branch has been Created");
       window.location.assign(`/admin/dashboard/${response.data._id}`);
     } catch (error) {

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { BranchDialog } from "@/components/custom/branch/branch-dialog";
-import BranchModal from "@/components/modal/branch/branch-modal";
+import BranchModal from "@/components/modal/admin/branch/branch-modal";
 
 export const BranchProvider = () => {
   const [isMounted, setIsMounted] = useState(false);

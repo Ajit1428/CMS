@@ -1,9 +1,9 @@
 const ManageUsers = () => {
-  return (
+ return(
   <div>
-   Admin Manage Users Page 
-    </div>
-    );
+    Hello world
+  </div>
+ )
 };
 
 export default ManageUsers;

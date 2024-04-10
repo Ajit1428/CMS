@@ -7,9 +7,11 @@ import MobileSidebar from "@/components/custom/sidebar/mobile-sidebar";
 import SideBar from "@/components/custom/sidebar/sidebar";
 import LeftNavbar from "@/components/custom/navbar/left-navbar";
 
+interface NavbarProps {
+  branchName: string;
+}
 
-
-export const SiderbarProvider = () => {
+export const SiderbarProvider: React.FC<NavbarProps> = ({ branchName }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -28,9 +30,9 @@ export const SiderbarProvider = () => {
       <div className="flex flex-col fixed z-50 m-4">
         <MobileSidebar />
       </div>
-      <div className="mb-3 border-b-2 shadow-sm rounded-md">
-        {/* <LeftNavbar /> */}
-        <RightNavbar />
+      <div className="flex items-center ml-56 mb-3 border-b-2 shadow-sm rounded-md">
+          <LeftNavbar branchName={branchName} />
+          <RightNavbar />
       </div>
     </div>
   );

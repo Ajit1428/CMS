@@ -14,7 +14,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className="h-full overflow-hidden">
-        <SiderbarProvider />
+        <SiderbarProvider branchName="" />
         <div className="ml-60 mt-2">{children}</div>
       </div>
     </>

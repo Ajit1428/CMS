@@ -1,4 +1,4 @@
-const UserDashboard = () => {
+const UserDashboard = async() => {
   return ( <div>
     This is an user dashboard
   </div> );

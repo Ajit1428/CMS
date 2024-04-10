@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { auth } from "@clerk/nextjs";
-import BranchModel from "@/model/branch/branch-model";
+import BranchModel from "@/model/admin/branch/branch-model";
 
 export async function POST(req: Request) {
   try {
