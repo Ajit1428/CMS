@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -18,15 +17,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useZustand } from "@/hooks/zustand/useZustand";
 import { DialogClose } from "@/components/ui/dialog";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectContent
+  SelectContent,
 } from "@/components/ui/select";
 
 const formSchema = z.object({
@@ -40,16 +37,17 @@ const formSchema = z.object({
   status: z.enum(["Approved", "Unapproved", "In-progress"], {
     required_error: "You need to select one of the three options",
   }),
-  sentBy: z.string({
-    required_error: "Please enter the sender's name",
-  }).min(3),
-  courier: z.enum(["Received", "Unreceived"]),
+  sentBy: z
+    .string({
+      required_error: "Please enter the sender's name",
+    })
+    .min(3),
+  courier: z.enum(["Received", "Not Received"]),
 });
 
 export const TMSUserModal = () => {
+  const [open, isOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,15 +62,14 @@ export const TMSUserModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-    console.log(values);
-    setLoading(true);
-    await axios.post("/api/admin/tms-user", values);
-    toast.success("The client has been added successfully");
-    router.push("/user/dashboard");
+      isOpen(true);
+      setLoading(true);
+      await axios.post("/api/admin/tms-user", values);
+      toast.success("The client has been added successfully");
+      isOpen(false);
     } catch (error) {
-      toast.error(
-        "Something went wrong",
-      );
+      if (error) isOpen(true);
+      toast.error("Something went wrong");
       console.log(`[DETAILS ERROR]`, error);
     } finally {
       setLoading(false);
@@ -87,7 +84,7 @@ export const TMSUserModal = () => {
           name="clientName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Client's Name</FormLabel>
+              <FormLabel>Client&apos;s Name</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
@@ -135,7 +132,7 @@ export const TMSUserModal = () => {
           name="sentBy"
           render={({ field }) => (
             <FormItem className="mt-2">
-              <FormLabel>Sender's Name</FormLabel>
+              <FormLabel>Sender&apos;s Name</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
@@ -157,7 +154,7 @@ export const TMSUserModal = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="Received">Received</SelectItem>
-                  <SelectItem value="Unreceived">Unreceived</SelectItem>
+                  <SelectItem value="Not Received">Not Received</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -175,11 +172,11 @@ export const TMSUserModal = () => {
               Cancel
             </Button>
           </DialogClose>
-          <DialogClose asChild>
-            <Button type="submit" className="mt-4" disabled={loading}>
-              Confirm
-            </Button>
-          </DialogClose>
+          {/* <DialogClose asChild> */}
+          <Button type="submit" className="mt-4" disabled={loading}>
+            Confirm
+          </Button>
+          {/* </DialogClose> */}
         </div>
       </form>
     </Form>

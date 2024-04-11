@@ -81,9 +81,9 @@ export const UserModal = () => {
         values.branchName = "Head Office";
       }
       setLoading(true);
-      await axios.post("/api/user", values);
+      const response = await axios.post("/api/user", values);
       toast.success("Thanks your for filing in the details");
-      router.push("/user/dashboard");
+      router.push(`/user/dashboard/${response.data._id}`);
     } catch (error) {
       toast.error(
         "You  already have an account and may belong to a certain branch",
