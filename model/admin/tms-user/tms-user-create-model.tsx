@@ -5,8 +5,8 @@ interface TMSUserCreate extends Document {
   clientCode: string;
   status: string;
   sentBy: string;
+  branchName: string;
   courier: string;
-  branchDetails: { value: string };
 }
 
 const TMSUserCreateSchema = new mongoose.Schema<TMSUserCreate>(
@@ -28,21 +28,21 @@ const TMSUserCreateSchema = new mongoose.Schema<TMSUserCreate>(
       type: String,
       required: true,
     },
+    branchName: {
+      type: String,
+      required: true,
+    },
     courier: {
       type: String,
       enum: ["Received", "Not Received"],
       required: true,
     },
-    branchDetails: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-const TMSUserModel = mongoose.models.TMS|| mongoose.model("TMS", TMSUserCreateSchema)
-export default TMSUserModel
+const TMSUserModel =
+  mongoose.models.TMS || mongoose.model("TMS", TMSUserCreateSchema);
+export default TMSUserModel;

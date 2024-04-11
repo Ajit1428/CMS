@@ -25,6 +25,23 @@ import {
   SelectValue,
   SelectContent,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { branches } from "@/config/static/branch/kumari-bank-branches";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { CheckIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useZustand } from "@/hooks/zustand/useZustand";
 
 const formSchema = z.object({
   clientName: z
@@ -42,12 +59,17 @@ const formSchema = z.object({
       required_error: "Please enter the sender's name",
     })
     .min(3),
+  branchName: z.string({
+    required_error: "Please select the branch in order to continue",
+  }),
   courier: z.enum(["Received", "Not Received"]),
 });
 
 export const TMSUserModal = () => {
-  const [open, isOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const open = useZustand((state) => state.open);
+  const isOpen = useZustand((state) => state.isOpen);
+  const onClose = useZustand((state) => state.onClose);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,17 +78,16 @@ export const TMSUserModal = () => {
       clientCode: "",
       status: undefined,
       sentBy: "",
+      branchName: "",
       courier: undefined,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      isOpen(true);
       setLoading(true);
       await axios.post("/api/admin/tms-user", values);
       toast.success("The client has been added successfully");
-      isOpen(false);
     } catch (error) {
       if (error) isOpen(true);
       toast.error("Something went wrong");
@@ -142,6 +163,69 @@ export const TMSUserModal = () => {
         />
         <FormField
           control={form.control}
+          name="branchName"
+          render={({ field }) => (
+            <FormItem className="mt-2 transition">
+              <FormLabel>Branch</FormLabel>
+              <Popover
+                open={open}
+                onOpenChange={(open) => {
+                  open ? isOpen((open = true)) : isOpen((open = false));
+                }}
+              >
+                <PopoverTrigger asChild>
+                  <FormControl className="flex justify-start">
+                    <Button variant="outline" className="w-full">
+                      {field.value
+                        ? branches?.map(
+                            (a) =>
+                              a?.branches?.find((b) => field.value === b.branch)
+                                ?.branch,
+                          )
+                        : "Select the branch"}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-[32rem] fixed right-[-16rem]">
+                  <Command>
+                    <CommandInput placeholder="Search..." />
+                    <CommandList className="w-full">
+                      <CommandEmpty>No such branch available</CommandEmpty>
+                      <CommandGroup>
+                        {branches.map((a) =>
+                          a.branches.map((b) => (
+                            <CommandItem
+                              key={b.branch}
+                              value={b.branch}
+                              className="aria-selected:bg-blue-400"
+                              onSelect={() => {
+                                form.setValue("branchName", b.branch);
+                                onClose(false);
+                              }}
+                            >
+                              {b.branch}
+                              <CheckIcon
+                                className={cn(
+                                  "ml-auto h-4 w-4",
+                                  b.branch === field.value
+                                    ? "opacity-100"
+                                    : "opacity-0",
+                                )}
+                              />
+                            </CommandItem>
+                          )),
+                        )}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="courier"
           render={({ field }) => (
             <FormItem className="mt-2">
@@ -172,11 +256,11 @@ export const TMSUserModal = () => {
               Cancel
             </Button>
           </DialogClose>
-          {/* <DialogClose asChild> */}
-          <Button type="submit" className="mt-4" disabled={loading}>
-            Confirm
-          </Button>
-          {/* </DialogClose> */}
+          <DialogClose asChild>
+            <Button type="submit" className="mt-4" disabled={loading}>
+              Confirm
+            </Button>
+          </DialogClose>
         </div>
       </form>
     </Form>

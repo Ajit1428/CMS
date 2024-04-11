@@ -13,6 +13,7 @@ export async function POST(req: Request) {
       clientCode: data?.clientCode,
       status: data?.status,
       sentBy: data?.sentBy,
+      branchName: data?.branchName,
       courier: data?.courier,
     };
 
@@ -20,15 +21,12 @@ export async function POST(req: Request) {
       return new NextResponse("unauthorized user", { status: 401 });
     }
 
-    const existClient= await TMSUserModel.findOne({ userId });
+    const existClient = await TMSUserModel.findOne({ userId });
 
-    if (
-      existClient?.clientCode === data?.clientCode
-    ) {
-      return new NextResponse(
-        "The client code already exists",
-        { status: 400 },
-      );
+    if (existClient?.clientCode === data?.clientCode) {
+      return new NextResponse("The client code already exists", {
+        status: 400,
+      });
     } else {
       var details = await new TMSUserModel(userDetails).save();
     }
