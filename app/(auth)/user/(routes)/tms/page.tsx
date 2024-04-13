@@ -1,9 +1,10 @@
+import { TMSUserTable } from "@/components/custom/tms-user/tms-user-table";
+const TmsPage = async () => {
+  return (
+    <div>
+      <TMSUserTable />
+    </div>
+  );
+};
 
-const TmsPage = () => {
-  return ( 
-  <div>
-    TMS page
-  </div>);
-}
- 
 export default TmsPage;
