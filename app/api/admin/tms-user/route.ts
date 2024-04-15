@@ -14,6 +14,7 @@ export async function POST(req: Request) {
       status: data?.status,
       sentBy: data?.sentBy,
       branchName: data?.branchName,
+      remarks: data?.remarks,
       courier: data?.courier,
     };
 

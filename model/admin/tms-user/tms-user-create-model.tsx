@@ -6,6 +6,7 @@ interface TMSUserCreate extends Document {
   status: string;
   sentBy: string;
   branchName: string;
+  remarks: string;
   courier: string;
 }
 
@@ -31,6 +32,9 @@ const TMSUserCreateSchema = new mongoose.Schema<TMSUserCreate>(
     branchName: {
       type: String,
       required: true,
+    },
+    remarks: {
+      type: String
     },
     courier: {
       type: String,

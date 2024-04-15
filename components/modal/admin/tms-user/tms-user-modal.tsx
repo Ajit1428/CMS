@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { DialogClose } from "@/components/ui/dialog";
 import {
   Select,
@@ -62,6 +63,7 @@ const formSchema = z.object({
   branchName: z.string({
     required_error: "Please select the branch in order to continue",
   }),
+  remarks: z.string(),
   courier: z.enum(["Received", "Not Received"]),
 });
 
@@ -79,6 +81,7 @@ export const TMSUserModal = () => {
       status: undefined,
       sentBy: "",
       branchName: "",
+      remarks: "",
       courier: undefined,
     },
   });
@@ -180,7 +183,7 @@ export const TMSUserModal = () => {
                         ? branches?.map(
                             (a) =>
                               a?.branches?.find((b) => field.value === b.branch)
-                                ?.branch,
+                                ?.branch
                           )
                         : "Select the branch"}
                     </Button>
@@ -209,17 +212,30 @@ export const TMSUserModal = () => {
                                   "ml-auto h-4 w-4",
                                   b.branch === field.value
                                     ? "opacity-100"
-                                    : "opacity-0",
+                                    : "opacity-0"
                                 )}
                               />
                             </CommandItem>
-                          )),
+                          ))
                         )}
                       </CommandGroup>
                     </CommandList>
                   </Command>
                 </PopoverContent>
               </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="remarks"
+          render={({ field }) => (
+            <FormItem className="mt-2">
+              <FormLabel>Remarks if any</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Type your remarks here..." {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
