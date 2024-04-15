@@ -30,7 +30,9 @@ export const TMSUserTable = async () => {
   return (
     <div className="overflow-x-hidden border-2 m-4">
       <Table>
-        <TableCaption className="font-bold border-2 text-lg bg-blue-200">Total sent KYC : <span className="text-xl">[{branch.length}]</span></TableCaption>
+        <TableCaption className="font-bold border-2 text-lg bg-blue-200">
+          Total sent KYC : <span className="text-xl">[{branch.length}]</span>
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Client Code</TableHead>
@@ -47,7 +49,18 @@ export const TMSUserTable = async () => {
               <TableRow key={a._id}>
                 <TableCell>{a.clientCode}</TableCell>
                 <TableCell>{a.clientName}</TableCell>
-                <TableCell><span className="bg-green-300 p-2 border-2 rounded-md">{a.status}</span></TableCell>
+                <TableCell>
+                  <span
+                    className={cn(
+                      "bg-pink-100 p-1 border rounded-md",
+                      a.status === "Approved"
+                        ? "bg-green-300"
+                        : a.status === "Unapproved" && "bg-red-400"
+                    )}
+                  >
+                    {a.status}
+                  </span>
+                </TableCell>
                 <TableCell>{a.sentBy}</TableCell>
                 <TableCell>
                   {a.createdAt.toLocaleDateString().toString()}
