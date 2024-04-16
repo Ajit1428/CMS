@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { BranchProvider } from "@/provider/branch/branch-provider";
+import { BranchProvider } from "@/provider/admin/branch/branch-provider";
 
 const SidebarBranchCreate = () => {
   const pathname = usePathname();

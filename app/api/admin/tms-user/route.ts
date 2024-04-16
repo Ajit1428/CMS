@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       return new NextResponse("unauthorized user", { status: 401 });
     }
 
-    const existClient = await TMSUserModel.findOne({ userId });
+    const existClient = await TMSUserModel.findOne({clientCode: data?.clientCode });
 
     if (existClient?.clientCode === data?.clientCode) {
       return new NextResponse("The client code already exists", {

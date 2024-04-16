@@ -86,7 +86,7 @@ export const UserModal = () => {
       router.push(`/user/dashboard/${response.data._id}`);
     } catch (error) {
       toast.error(
-        "You  already have an account and may belong to a certain branch",
+        "You  already have an account and may belong to a certain branch"
       );
       console.log(`[DETAILS ERROR]`, error);
     } finally {
@@ -181,7 +181,7 @@ export const UserModal = () => {
                         ? branches?.map(
                             (a) =>
                               a?.branches?.find((b) => field.value === b.branch)
-                                ?.branch,
+                                ?.branch
                           )
                         : "Select the branch"}
                     </Button>
@@ -210,11 +210,11 @@ export const UserModal = () => {
                                   "ml-auto h-4 w-4",
                                   b.branch === field.value
                                     ? "opacity-100"
-                                    : "opacity-0",
+                                    : "opacity-0"
                                 )}
                               />
                             </CommandItem>
-                          )),
+                          ))
                         )}
                       </CommandGroup>
                     </CommandList>
@@ -238,11 +238,9 @@ export const UserModal = () => {
             </FormItem>
           )}
         />
-        <DialogClose asChild>
-          <Button type="submit" className="mt-4" disabled={loading}>
-            Confirm
-          </Button>
-        </DialogClose>
+        <Button type="submit" className="mt-4" disabled={loading}>
+          Confirm
+        </Button>
       </form>
     </Form>
   );

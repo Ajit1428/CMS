@@ -91,9 +91,9 @@ export const TMSUserModal = () => {
       setLoading(true);
       await axios.post("/api/admin/tms-user", values);
       toast.success("The client has been added successfully");
-    } catch (error) {
-      if (error) isOpen(true);
-      toast.error("Something went wrong");
+      window.location.reload();
+    } catch (error: any) {
+      toast.error(`${error?.response?.data}`);
       console.log(`[DETAILS ERROR]`, error);
     } finally {
       setLoading(false);
@@ -173,7 +173,7 @@ export const TMSUserModal = () => {
               <Popover
                 open={open}
                 onOpenChange={(open) => {
-                  open ? isOpen((open = true)) : isOpen((open = false));
+                  open ? isOpen(true) : isOpen(false);
                 }}
               >
                 <PopoverTrigger asChild>
@@ -272,11 +272,9 @@ export const TMSUserModal = () => {
               Cancel
             </Button>
           </DialogClose>
-          <DialogClose asChild>
-            <Button type="submit" className="mt-4" disabled={loading}>
-              Confirm
-            </Button>
-          </DialogClose>
+          <Button type="submit" className="mt-4" disabled={loading}>
+            Confirm
+          </Button>
         </div>
       </form>
     </Form>

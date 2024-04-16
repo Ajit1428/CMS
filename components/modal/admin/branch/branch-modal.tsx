@@ -56,9 +56,9 @@ const BranchModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/admin/branch", values);
+      await axios.post("/api/admin/branch", values);
       toast.success("The Branch has been Created");
-      window.location.assign(`/admin/dashboard/${response.data._id}`);
+      window.location.reload();
     } catch (error) {
       toast.error("The branch you are trying to create already exists");
     } finally {
@@ -87,7 +87,7 @@ const BranchModal = () => {
                         ? branches?.map(
                             (a) =>
                               a?.branches?.find((b) => field.value === b.branch)
-                                ?.branch,
+                                ?.branch
                           )
                         : "Select the branch"}
                     </Button>
@@ -116,18 +116,18 @@ const BranchModal = () => {
                                   "ml-auto h-4 w-4",
                                   b.branch === field.value
                                     ? "opacity-100"
-                                    : "opacity-0",
+                                    : "opacity-0"
                                 )}
                               />
                             </CommandItem>
-                          )),
+                          ))
                         )}
                       </CommandGroup>
                     </CommandList>
                   </Command>
                 </PopoverContent>
-                <DialogClose asChild>
-                  <div className="flex justify-end gap-2 mt-4">
+                <div className="flex justify-end gap-2 mt-4">
+                  <DialogClose asChild>
                     <Button
                       disabled={loading}
                       type="reset"
@@ -135,11 +135,11 @@ const BranchModal = () => {
                     >
                       Cancel
                     </Button>
-                    <Button disabled={loading} type="submit">
-                      Continue
-                    </Button>
-                  </div>
-                </DialogClose>
+                  </DialogClose>
+                  <Button disabled={loading} type="submit">
+                    Continue
+                  </Button>
+                </div>
               </Popover>
               <FormMessage />
             </FormItem>

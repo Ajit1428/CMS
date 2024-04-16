@@ -19,6 +19,7 @@ const TMSUserCreateSchema = new mongoose.Schema<TMSUserCreate>(
     clientCode: {
       type: String,
       required: true,
+      unique: true
     },
     status: {
       type: String,
