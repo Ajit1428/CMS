@@ -13,16 +13,18 @@ const StaffLayout = async ({ children }: { children: React.ReactNode }) => {
     redirect("/");
   }
 
-  const existBranch = await BranchModel.findOne({branchName: validatedUser?.branchName})
+  const existBranch = await BranchModel.findOne({
+    branchName: validatedUser?.branchName,
+  });
 
-  if(!existBranch){
-    redirect("/")
+  if (!existBranch) {
+    redirect("/");
   }
 
   return (
     <div className="h-full overflow-hidden">
       <SiderbarProvider branchName={validatedUser.branchName} />
-      <div className="ml-60">{children}</div>
+      <div className="ml-56">{children}</div>
     </div>
   );
 };
