@@ -20,28 +20,30 @@ interface ModalProps {
 
 export const BranchDialog = ({ title, description, children }: ModalProps) => {
   return (
-        <Dialog>
-          <DialogTrigger asChild>
-              <Button className="flex items-center gap-1">
-                <CirclePlus size={15} />
-                Create a Branch
-              </Button>
-          </DialogTrigger>
-          <DialogContent className="dark:bg-[#1e1e2e]">
-            <DialogHeader>
-              <DialogTitle className="text-blue-500 font-extrabold flex items-center gap-2">
-                <Image
-                  alt="kumari_logo"
-                  src="/kumari_logo.png"
-                  width={40}
-                  height={40}
-                />
-                {title}
-              </DialogTitle>
-              <DialogDescription className="flex justify-start">{description}</DialogDescription>
-            </DialogHeader>
-            {children}
-          </DialogContent>
-        </Dialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="flex items-center gap-1 w-full">
+          <CirclePlus size={15} />
+          Create a Branch
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="dark:bg-[#1e1e2e]">
+        <DialogHeader>
+          <DialogTitle className="text-blue-500 font-extrabold flex items-center gap-2">
+            <Image
+              alt="kumari_logo"
+              src="/kumari_logo.png"
+              width={40}
+              height={40}
+            />
+            {title}
+          </DialogTitle>
+          <DialogDescription className="flex justify-start">
+            {description}
+          </DialogDescription>
+        </DialogHeader>
+        {children}
+      </DialogContent>
+    </Dialog>
   );
 };

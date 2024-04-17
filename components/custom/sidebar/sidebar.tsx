@@ -8,9 +8,9 @@ function SideBar() {
     <div className="flex md:flex flex-col fixed w-[20rem] md:w-56 items-center h-full  border-r shadow-md bg-white dark:bg-[#1e1e2e] dark:shadow-blue-400">
       <KumariLogo />
       <SideBarRoutes />
-      <div className="flex flex-col space-y-4 mb-4 items-center">
-      <SidebarTMSUserCreate />
-      <SidebarBranchCreate />
+      <div className="flex flex-col space-y-4 mb-4 justify-start">
+        <SidebarTMSUserCreate />
+        <SidebarBranchCreate />
       </div>
     </div>
   );

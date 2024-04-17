@@ -17,8 +17,8 @@ import Image from "next/image";
 interface TMSUserProps {
   title: string;
   description: string;
-  buttonTitle: string,
-  icon: LucideIcon
+  buttonTitle: string;
+  icon: LucideIcon;
   children?: React.ReactNode;
 }
 
@@ -32,7 +32,7 @@ export const TMSUserDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-1">
+        <Button className="flex items-center gap-1 w-full">
           <Icon size={15} />
           {buttonTitle}
         </Button>
