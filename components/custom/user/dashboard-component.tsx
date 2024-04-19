@@ -4,6 +4,8 @@ import TMSUserModel from "@/model/admin/tms-user/tms-user-create-model";
 import UserModel from "@/model/user/user-model";
 import { auth } from "@clerk/nextjs";
 import { DashboardPieChart } from "./dashboard/dashboard-pie-chart";
+import { LineChart } from "./dashboard/dashboard-line";
+import { BarChart } from "./dashboard/dashboard-bar";
 
 export const DashboardComponent = async () => {
   const { userId } = auth();
@@ -18,36 +20,20 @@ export const DashboardComponent = async () => {
     branchName: userData?.branchName,
   });
 
-  const totalKYC = fetchedData.length.toString();
-  const approved = fetchedData
-    .filter((a) => a?.status === "Approved")
-    .length.toString();
-  const unapproved = fetchedData
-    .filter((a) => a?.status === "Approved")
-    .length.toString();
-
-  const data = {
-    labels: ["Received KYC", "Approved KYC", "Uapproved KYC"],
-    datasets: [
-      {
-        label: "Total",
-        data: [totalKYC, approved, unapproved],
-        backgroundColor: ["#a6e3a1", "#89dceb", "#f9e2af"],
-      },
-    ],
-  };
-
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <div className="grid grid-rows-2 grid-flow-row gap-2 border-1 shadow-md p-2 mb-4">
-        <div className="rows-span-1">
-          <span className="text-3xl font-extrabold mx-auto">KYC</span>
-          <DashboardPieChart data={data} />
-        </div>
-        <div className="row-span-1">This is the second row</div>
+    <div className="grid grid-cols-4 gap-4 ">
+      <div className="col-span-2 border-2 p-2 shadow-md">
+        <span className="text-3xl font-extrabold">PieChart KYC</span>
+        <DashboardPieChart dataF={fetchedData} />
       </div>
-      <div className="grid grid-rows-2">This is the second div</div>
-      <div className="grid grid-rows-2"> This is the third and final div</div>
+      <div className="col-span-2 border-2 p-2 shadow-md">
+        <span className="text-3xl font-extrabold">BarChart KYC</span>
+        <BarChart dataF={fetchedData} />
+      </div>
+      <div className="col-span-4 border-2 p-2 shadow-md">
+        <span className="text-3xl font-extrabold">LineChart KYC</span>
+        <LineChart dataF={fetchedData} />
+      </div>
     </div>
   );
 };

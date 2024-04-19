@@ -5,18 +5,25 @@ import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
 
 ChartJS.register(ArcElement, Legend, Tooltip);
 
-type dataProps = {
-  data: {
-    labels: string[];
-    datasets: {
-      label: string;
-      data: string[];
-      backgroundColor: string[];
-    }[];
-  };
-};
+export const DashboardPieChart = ({ dataF }: { dataF: any[] }) => {
+  const totalKYC = dataF.length.toString();
+  const approved = dataF
+    .filter((a) => a?.status === "Approved")
+    .length.toString();
+  const unapproved = dataF
+    .filter((a) => a?.status === "Approved")
+    .length.toString();
 
-export const DashboardPieChart: React.FC<dataProps> = ({ data }) => {
+  const data = {
+    labels: ["Received KYC", "Approved KYC", "Uapproved KYC"],
+    datasets: [
+      {
+        label: "Total",
+        data: [totalKYC, approved, unapproved],
+        backgroundColor: ["#89dceb", "#a6e3a1", "#f1807e"],
+      },
+    ],
+  };
   const options = {
     responsive: true,
     borderColor: "white",

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { LayoutDashboard, Truck, Users, Cog, UserCog2 } from "lucide-react";
 
@@ -12,11 +12,6 @@ export const userRoutes = [
     label: "TMS",
     href: "/user/tms",
     icon: Users,
-  },
-  {
-    label: "Courier",
-    href: "/user/courier",
-    icon: Truck,
   },
 ];
 
@@ -40,10 +35,5 @@ export const adminRoutes = [
     label: "TMS",
     href: "/admin/tms",
     icon: Users,
-  },
-  {
-    label: "Courier",
-    href: "/admin/courier",
-    icon: Truck,
   },
 ];
