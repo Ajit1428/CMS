@@ -30,7 +30,7 @@ export const SiderbarProvider: React.FC<NavbarProps> = ({ branchName }) => {
       <div className="flex flex-col fixed z-50 m-4">
         <MobileSidebar />
       </div>
-      <div className="flex items-center mb-3 border-b-2 shadow-sm rounded-md">
+      <div className="flex items-center mb-3">
         <LeftNavbar branchName={branchName} />
         <RightNavbar />
       </div>

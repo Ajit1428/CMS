@@ -1,7 +1,12 @@
+import { AdminDashboardComponent } from "@/components/custom/admin/admin-dashboard-component";
+
 const AdminDashboard = () => {
-  return ( <div>
-    This is Admin dashboard
-  </div> );
-}
- 
+  return (
+    <div>
+      <AdminDashboardComponent />
+    </div>
+  );
+};
+
 export default AdminDashboard;
+

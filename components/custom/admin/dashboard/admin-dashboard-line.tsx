@@ -21,19 +21,17 @@ ChartJS.register(
 );
 
 export const LineChart = ({ dataF }: { dataF: any[] }) => {
-  const totalKYC = dataF.length.toString();
-  const approved = dataF
-    .filter((a) => a?.status === "Approved")
-    .length.toString();
-  const unapproved = dataF
-    .filter((a) => a?.status === "Approved")
+  const totalUser = dataF.length.toString();
+  const activeUser = dataF.filter((a) => a === "Approved").length.toString();
+  const inactiveUser = dataF
+    .filter((a) => a === "Unapproved")
     .length.toString();
   const data = {
-    labels: ["Received KYC", "Approved KYC", "Uapproved KYC"],
+    labels: ["Total User", "Active User", "Inactive User"],
     datasets: [
       {
         label: "Total",
-        data: [totalKYC, approved, unapproved],
+        data: [totalUser, activeUser, inactiveUser],
         backgroundColor: "#f9e2af",
         borderWidth: 3,
         borderColor: "#89dceb",

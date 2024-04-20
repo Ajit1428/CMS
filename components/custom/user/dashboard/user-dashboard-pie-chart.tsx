@@ -7,12 +7,8 @@ ChartJS.register(ArcElement, Legend, Tooltip);
 
 export const DashboardPieChart = ({ dataF }: { dataF: any[] }) => {
   const totalKYC = dataF.length.toString();
-  const approved = dataF
-    .filter((a) => a?.status === "Approved")
-    .length.toString();
-  const unapproved = dataF
-    .filter((a) => a?.status === "Approved")
-    .length.toString();
+  const approved = dataF.filter((a) => a === "Approved").length.toString();
+  const unapproved = dataF.filter((a) => a === "Unapproved").length.toString();
 
   const data = {
     labels: ["Received KYC", "Approved KYC", "Uapproved KYC"],
