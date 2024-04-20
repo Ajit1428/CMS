@@ -23,12 +23,12 @@ export const adminRoutes = [
   },
   {
     label: "Manage Branches",
-    href: "/admin/manage-branches",
+    href: "/admin/manage-branch",
     icon: Cog,
   },
   {
     label: "Manage Users",
-    href: "/admin/manage-users",
+    href: "/admin/manage-user",
     icon: UserCog2,
   },
   {

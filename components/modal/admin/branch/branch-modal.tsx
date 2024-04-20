@@ -87,7 +87,7 @@ const BranchModal = () => {
                         ? branches?.map(
                             (a) =>
                               a?.branches?.find((b) => field.value === b.branch)
-                                ?.branch
+                                ?.branch,
                           )
                         : "Select the branch"}
                     </Button>
@@ -116,11 +116,11 @@ const BranchModal = () => {
                                   "ml-auto h-4 w-4",
                                   b.branch === field.value
                                     ? "opacity-100"
-                                    : "opacity-0"
+                                    : "opacity-0",
                                 )}
                               />
                             </CommandItem>
-                          ))
+                          )),
                         )}
                       </CommandGroup>
                     </CommandList>

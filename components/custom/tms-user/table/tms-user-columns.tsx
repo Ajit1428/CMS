@@ -32,6 +32,7 @@ export const columns: ColumnDef<tmsUser>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-0 py-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Client Code
