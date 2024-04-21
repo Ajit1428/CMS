@@ -1,9 +1,15 @@
 import { columns } from "@/components/custom/tms-user/table/tms-user-columns";
 import { DataTable } from "@/components/custom/tms-user/table/tms-user-data-table";
 import TMSUserModel from "@/model/admin/tms-user/tms-user-create-model";
+import UserModel from "@/model/user/user-model";
+import { auth } from "@clerk/nextjs";
 
 const TmsPage = async () => {
-  const dataF = await TMSUserModel.find();
+  const { userId } = auth();
+
+  const userData = await UserModel.findOne({ userId });
+
+  const dataF = await TMSUserModel.find({ branchName: userData.branchName });
 
   const data = dataF.map((a) => {
     return {
