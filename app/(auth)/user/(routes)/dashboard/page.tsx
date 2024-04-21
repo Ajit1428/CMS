@@ -2,7 +2,7 @@ import { DashboardComponent } from "@/components/custom/user/user-dashboard-comp
 
 const UserDashboard = async () => {
   return (
-    <div className="m-4 overflow-y-auto">
+    <div className="m-2 overflow-y-auto">
       <DashboardComponent />
     </div>
   );

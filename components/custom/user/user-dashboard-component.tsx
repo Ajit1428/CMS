@@ -24,7 +24,7 @@ export const DashboardComponent = async () => {
   const courierData = fetchedData.map((a) => a.courier);
 
   return (
-    <div className="grid grid-cols-4 gap-4 ">
+    <div className="grid grid-cols-4 gap-2 ">
       <div className="col-span-2 border-2 p-2 shadow-md">
         <span className="text-3xl font-extrabold">PieChart KYC</span>
         <DashboardPieChart dataF={kycData} />
