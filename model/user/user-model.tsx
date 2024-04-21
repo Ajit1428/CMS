@@ -21,13 +21,13 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ["kbl", "kbsl"],
+      enum: ["kbl", "kbsl", "admin"],
       required: true,
     },
     email: {
       type: String,
       required: [true, "Please enter your official mail"],
-      unique: true
+      unique: true,
     },
     branchName: {
       type: String,

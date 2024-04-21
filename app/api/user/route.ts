@@ -40,3 +40,20 @@ export async function POST(req: Request) {
     return new NextResponse(`Branch POST error ${error}`, { status: 400 });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { userId } = auth();
+    const { _id } = await req.json();
+
+    if (!userId) {
+      return new NextResponse("Unauthorized user", { status: 401 });
+    }
+
+    const deleteUser = await UserModel.findByIdAndDelete(_id);
+
+    return NextResponse.json(deleteUser);
+  } catch (error) {
+    return new NextResponse(`Branch DELETE error ${error}`, { status: 400 });
+  }
+}

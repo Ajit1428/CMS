@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import { columns } from "@/components/custom/tms-user/table/tms-user-columns";
 import { DataTable } from "@/components/custom/tms-user/table/tms-user-data-table";
 import TMSUserModel from "@/model/admin/tms-user/tms-user-create-model";
@@ -6,6 +8,10 @@ import { auth } from "@clerk/nextjs";
 
 const TmsPage = async () => {
   const { userId } = auth();
+
+  if (!userId) {
+    redirect("/");
+  }
 
   const userData = await UserModel.findOne({ userId });
 

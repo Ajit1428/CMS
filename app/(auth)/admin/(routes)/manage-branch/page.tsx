@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { columns } from "@/components/custom/admin/table/branch/admin-columns";
-import { DataTable } from "@/components/custom/admin/table/branch/admin-data-table";
+import { columns } from "@/components/custom/admin/table/branch/admin-branch-columns";
+import { DataTable } from "@/components/custom/admin/table/branch/admin-branch-data-table";
 import BranchModel from "@/model/admin/branch/branch-model";
 import { auth } from "@clerk/nextjs";
 
