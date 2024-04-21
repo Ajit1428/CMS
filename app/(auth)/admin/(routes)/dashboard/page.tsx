@@ -2,11 +2,15 @@ import { AdminDashboardComponent } from "@/components/custom/admin/admin-dashboa
 
 const AdminDashboard = () => {
   return (
-    <div>
+    <div className="m-2">
       <AdminDashboardComponent />
     </div>
   );
 };
 
 export default AdminDashboard;
+
+
+
+
 
