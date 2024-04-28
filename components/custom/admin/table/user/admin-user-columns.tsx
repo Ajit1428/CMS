@@ -13,6 +13,7 @@ export type branchProps = {
   email: string;
   branchName: string;
   contact: string;
+  isAdmin: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -89,7 +90,11 @@ export const columns: ColumnDef<branchProps>[] = [
           <Button onClick={onClickEdit} className="mr-2">
             <EditIcon className="w-5 h-5" />
           </Button>
-          <Button onClick={onClickDelete} variant="destructive">
+          <Button
+            onClick={onClickDelete}
+            variant="destructive"
+            disabled={userData.isAdmin !== "admin" && true}
+          >
             <Trash2Icon className="w-5 h-5" />
           </Button>
         </>

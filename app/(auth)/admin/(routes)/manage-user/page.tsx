@@ -5,7 +5,7 @@ import { DataTable } from "@/components/custom/admin/table/user/admin-user-data-
 import { auth } from "@clerk/nextjs";
 import UserModel from "@/model/user/user-model";
 
-const ManageUsers = async () => {
+const ManageUsersPage = async () => {
   const { userId } = auth();
 
   if (!userId) {
@@ -13,6 +13,8 @@ const ManageUsers = async () => {
   }
 
   const dataF = await UserModel.find();
+
+  const isAdminDetails = await UserModel.findOne({ userId });
 
   const data = dataF.map((a) => {
     return {
@@ -22,6 +24,7 @@ const ManageUsers = async () => {
       email: a.email,
       branchName: a.branchName,
       contact: a.contact,
+      isAdmin: isAdminDetails.role,
       createdAt: a.createdAt,
       updatedAt: a.updatedAt,
     };
@@ -33,4 +36,4 @@ const ManageUsers = async () => {
   );
 };
 
-export default ManageUsers;
+export default ManageUsersPage;

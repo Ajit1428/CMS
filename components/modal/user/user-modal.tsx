@@ -20,7 +20,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { branches } from "@/config/static/branch/kumari-bank-branches";
 import { useZustand } from "@/hooks/zustand/useZustand";
-import { DialogClose } from "@/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
@@ -78,7 +77,7 @@ export const UserModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       if (values.role === "kbsl") {
-        values.branchName = "Head Office";
+        values.branchName = "Head Office, Kathmandu";
       }
       setLoading(true);
       const response = await axios.post("/api/user", values);
@@ -86,7 +85,7 @@ export const UserModal = () => {
       router.push(`/user/dashboard/${response.data._id}`);
     } catch (error) {
       toast.error(
-        "You  already have an account and may belong to a certain branch"
+        "You  already have an account and may belong to a certain branch",
       );
       console.log(`[DETAILS ERROR]`, error);
     } finally {
@@ -181,7 +180,7 @@ export const UserModal = () => {
                         ? branches?.map(
                             (a) =>
                               a?.branches?.find((b) => field.value === b.branch)
-                                ?.branch
+                                ?.branch,
                           )
                         : "Select the branch"}
                     </Button>
@@ -210,11 +209,11 @@ export const UserModal = () => {
                                   "ml-auto h-4 w-4",
                                   b.branch === field.value
                                     ? "opacity-100"
-                                    : "opacity-0"
+                                    : "opacity-0",
                                 )}
                               />
                             </CommandItem>
-                          ))
+                          )),
                         )}
                       </CommandGroup>
                     </CommandList>
