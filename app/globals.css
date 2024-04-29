@@ -4,8 +4,18 @@
 
 html,
 body,
-:root{
-  height: 100%
+:root {
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-image: linear-gradient(skyblue, yellow);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: skyblue;
+  border-radius: 20px;
 }
 
 @layer base {
@@ -54,4 +64,3 @@ body,
     --ring: 224.3 76.3% 48%;
   }
 }
-

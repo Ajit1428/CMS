@@ -22,9 +22,9 @@ const StaffLayout = async ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className="h-full overflow-hidden">
+    <div className="h-full">
       <SiderbarProvider branchName={validatedUser.branchName} />
-      <div className="ml-56">{children}</div>
+      <div className="md:ml-56">{children}</div>
     </div>
   );
 };

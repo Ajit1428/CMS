@@ -26,16 +26,16 @@ export const AdminDashboardComponent = async () => {
   const tmsData = tms.map((a) => a.status);
 
   return (
-    <div className="grid grid-cols-4 gap-4 ">
-      <div className="col-span-2 border-2 p-2 shadow-md">
+    <div className="grid md:grid-cols-4 gap-4 grid-cols-1">
+      <div className="md:col-span-2 border-2 p-2 shadow-md">
         <span className="text-3xl font-extrabold">Branch</span>
         <DashboardPieChart dataF={branchData} />
       </div>
-      <div className="col-span-2 border-2 p-2 shadow-md">
+      <div className="md:col-span-2 border-2 p-2 shadow-md">
         <span className="text-3xl font-extrabold">User</span>
         <BarChart dataF={userData} />
       </div>
-      <div className="col-span-4 border-2 p-2 shadow-md">
+      <div className="md:col-span-4 border-2 p-2 shadow-md">
         <span className="text-3xl font-extrabold">TMS User</span>
         <LineChart dataF={tmsData} />
       </div>
