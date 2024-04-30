@@ -4,9 +4,9 @@ import TMSUserModel from "@/model/admin/tms-user/tms-user-create-model";
 import UserModel from "@/model/user/user-model";
 import BranchModel from "@/model/admin/branch/branch-model";
 import { auth } from "@clerk/nextjs";
-import { DashboardPieChart } from "./dashboard/admin-dashboard-pie-chart";
-import { LineChart } from "./dashboard/admin-dashboard-line";
-import { BarChart } from "./dashboard/admin-dashboard-bar";
+import { DashboardPieChart } from "./admin-dashboard-pie-chart";
+import { LineChart } from "./admin-dashboard-line";
+import { BarChart } from "./admin-dashboard-bar";
 
 export const AdminDashboardComponent = async () => {
   const { userId } = auth();

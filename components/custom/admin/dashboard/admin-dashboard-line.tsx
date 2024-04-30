@@ -46,6 +46,8 @@ export const LineChart = ({ dataF }: { dataF: any[] }) => {
     interaction: {
       intersect: false,
     },
+
+    aspectRatio: 2,
   };
 
   return <Line data={data} options={options} />;

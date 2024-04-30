@@ -9,7 +9,7 @@ export const userRoutes = [
     icon: LayoutDashboard,
   },
   {
-    label: "TMS",
+    label: "TMS Users",
     href: "/user/tms",
     icon: Users,
   },
@@ -32,7 +32,7 @@ export const adminRoutes = [
     icon: UserCog2,
   },
   {
-    label: "TMS",
+    label: "TMS Users",
     href: "/admin/tms",
     icon: Users,
   },

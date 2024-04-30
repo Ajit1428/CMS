@@ -1,4 +1,4 @@
-import { DashboardComponent } from "@/components/custom/user/user-dashboard-component";
+import { DashboardComponent } from "@/components/custom/user/dashboard/user-dashboard-component";
 
 const UserDashboard = async () => {
   return (
