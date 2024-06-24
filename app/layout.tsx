@@ -28,7 +28,6 @@ export default function RootLayout({
   mongoDB();
   return (
     <ClerkProvider
-      publishableKey={process.env.CLERK_FRONTEND_API}
       appearance={{
         baseTheme: shadesOfPurple,
       }}
